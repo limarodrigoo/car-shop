@@ -72,7 +72,7 @@ class CarController extends Controller<Car> {
         return res.status(500).json({ error: this.errors.internal });
       }
       return car
-        ? res.status(200).json(car)
+        ? res.status(204).json(car)
         : res.status(404).json({ error: this.errors.notFound });
     } catch (e) {
       return res.status(500).json({ error: this.errors.internal });
