@@ -5,7 +5,6 @@ import {
 } from "../../../../__tests__/utils/CarsMock";
 import Sinon from "sinon";
 import { carSchema } from "../../../interfaces/CarInterface";
-import CarModel from '../../../models/CarsModel';
 
 const carService = new CarService();
 
