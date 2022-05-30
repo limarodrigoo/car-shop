@@ -69,11 +69,9 @@ class CarController extends Controller<Car> {
     try {
       const car = await this.service.delete(id);
       if (!car) {
-        return res.status(500).json({ error: this.errors.internal });
+        return res.status(404).json({ error: this.errors.notFound });
       }
-      return car
-        ? res.status(204).json(car)
-        : res.status(404).json({ error: this.errors.notFound });
+      return res.status(204).json(car);
     } catch (e) {
       return res.status(500).json({ error: this.errors.internal });
     }
