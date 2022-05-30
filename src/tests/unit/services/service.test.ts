@@ -8,7 +8,6 @@ import { carSchema } from "../../../interfaces/CarInterface";
 import CarModel from '../../../models/CarsModel';
 
 const carService = new CarService();
-const carModel = new CarModel();
 
 describe("CarService", () => {
   describe("create with invalid input", () => {
