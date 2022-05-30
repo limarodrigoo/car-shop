@@ -6,7 +6,7 @@ import { Car } from '../interfaces/CarInterface';
 class CarController extends Controller<Car> {
   private _route: string;
 
-  constructor(route :string, service = new CarService()) {
+  constructor(route: string, service = new CarService()) {
     super(service);
     this._route = route;
   }
@@ -39,11 +39,9 @@ class CarController extends Controller<Car> {
     try {
       const car = await this.service.readOne(id);
       if (!car) {
-        return res.status(500).json({ error: this.errors.internal });
+        return res.status(404).json({ error: this.errors.notFound });
       }
-      return car
-        ? res.status(200).json(car)
-        : res.status(404).json({ error: this.errors.notFound });
+      return res.status(200).json(car);
     } catch (e) {
       return res.status(500).json({ error: this.errors.internal });
     }
@@ -55,14 +53,12 @@ class CarController extends Controller<Car> {
     try {
       const car = await this.service.update(id, body);
       if (!car) {
-        return res.status(500).json({ error: this.errors.internal });
+        return res.status(404).json({ error: this.errors.notFound });
       }
       if ('error' in car) {
         return res.status(400).json(car);
       }
-      return car 
-        ? res.status(200).json(car)
-        : res.status(404).json({ error: this.errors.internal });
+      return res.status(200).json(car);
     } catch (e) {
       return res.status(500).json({ error: this.errors.internal });
     }
