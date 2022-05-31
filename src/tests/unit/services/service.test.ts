@@ -8,11 +8,11 @@ import Sinon from "sinon";
 import { carSchema } from "../../../interfaces/CarInterface";
 import CarModel from "../../../models/CarsModel";
 
+const carModel = new CarModel();
+
+const carService = new CarService(carModel);
 
 describe("CarService", () => {
-  const carModel = new CarModel();
-  
-  const carService = new CarService();
   describe("create with invalid input", () => {
     let parseStub: Sinon.SinonStub;
     before(() => {
@@ -36,9 +36,9 @@ describe("CarService", () => {
     after(() => {
       readStub.restore();
     });
-    it('returns an array', async () => {
+    it('returns an array of objects', async () => {
       const result = await carService.read();
-      expect(result).to.be.equals([coverageCar]);
+      expect(result[0]).to.be.equal(coverageCar)
     });
   });
   describe("readOne", () => {
